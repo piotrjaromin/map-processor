@@ -18,6 +18,7 @@ type Config struct {
 	Sinks map[string][]interface{} `yaml:"sinks"`
 }
 
+// Read yaml file and create configuration
 func Read(file string) (Config, error) {
 
 	config := Config{}

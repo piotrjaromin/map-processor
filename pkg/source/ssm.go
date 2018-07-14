@@ -19,9 +19,9 @@ type ParamsFetcher struct {
 	WithDecryption *bool
 }
 
+// NewSSM creates Source that will read data from AWS Parameter store, read is done based on path
 func NewSSM(region string, withDecryption bool, path string) (ParamsFetcher, error) {
 
-	fmt.Printf("Creating SSM source with parameters %s, %b, %s", region, withDecryption, path)
 	sess, err := session.NewSession(&aws.Config{
 		Region: &region,
 	})
@@ -41,10 +41,10 @@ func NewSSM(region string, withDecryption bool, path string) (ParamsFetcher, err
 }
 
 func (pf ParamsFetcher) Get() (map[string]string, error) {
-	return pf.FetchAllRecursive(nil, map[string]string{})
+	return pf.fetchAllRecursive(nil, map[string]string{})
 }
 
-func (pf ParamsFetcher) FetchAllRecursive(nextToken *string, params map[string]string) (map[string]string, error) {
+func (pf ParamsFetcher) fetchAllRecursive(nextToken *string, params map[string]string) (map[string]string, error) {
 
 	queryPath := ssm.GetParametersByPathInput{
 		Recursive:      &trueVal,
@@ -72,7 +72,7 @@ func (pf ParamsFetcher) FetchAllRecursive(nextToken *string, params map[string]s
 	}
 
 	if res.NextToken != nil {
-		return pf.FetchAllRecursive(res.NextToken, params)
+		return pf.fetchAllRecursive(res.NextToken, params)
 	}
 
 	return params, nil

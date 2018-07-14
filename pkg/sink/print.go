@@ -1,21 +1,22 @@
 package sink
 
 import (
-	"fmt"
+	"log"
 )
 
 type PrintSink struct {
 	params map[string]string
 }
 
+// NewPrint creates sink which prints data with which it was filled
 func NewPrint() (*PrintSink, error) {
 	return &PrintSink{}, nil
 }
 
 func (ps *PrintSink) Fill(params map[string]string) error {
-
+	log.Println("Printing data")
 	for key, val := range params {
-		fmt.Printf("%s: %s", key, val)
+		log.Printf("%s: %s", key, val)
 	}
 
 	return nil
