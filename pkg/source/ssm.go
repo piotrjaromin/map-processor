@@ -19,9 +19,11 @@ type ParamsFetcher struct {
 	WithDecryption *bool
 }
 
-func NewSSM(region *string, withDecryption *bool, path *string) ParamsFetcher {
+func NewSSM(region string, withDecryption bool, path string) (ParamsFetcher, error) {
+
+	fmt.Printf("Creating SSM source with parameters %s, %b, %s", region, withDecryption, path)
 	sess, err := session.NewSession(&aws.Config{
-		Region: region,
+		Region: &region,
 	})
 
 	if err != nil {
@@ -32,9 +34,9 @@ func NewSSM(region *string, withDecryption *bool, path *string) ParamsFetcher {
 
 	return ParamsFetcher{
 		Svc:            svc,
-		Path:           path,
-		WithDecryption: withDecryption,
-	}
+		Path:           &path,
+		WithDecryption: &withDecryption,
+	}, nil
 
 }
 

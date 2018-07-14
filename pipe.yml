@@ -1,0 +1,8 @@
+source:
+  ssm:
+    - eu-central-1
+    - true
+    - /test/key
+
+sinks:
+  print:

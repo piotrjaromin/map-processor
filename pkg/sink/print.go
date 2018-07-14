@@ -4,17 +4,23 @@ import (
 	"fmt"
 )
 
-type PrintSink struct{}
-
-func NewPrint() PrintSink {
-	return PrintSink{}
+type PrintSink struct {
+	params map[string]string
 }
 
-func (ps PrintSink) Fill(params map[string]string) error {
+func NewPrint() (*PrintSink, error) {
+	return &PrintSink{}, nil
+}
+
+func (ps *PrintSink) Fill(params map[string]string) error {
 
 	for key, val := range params {
 		fmt.Printf("%s: %s", key, val)
 	}
 
 	return nil
+}
+
+func (ps *PrintSink) Get() (map[string]string, error) {
+	return ps.params, nil
 }
