@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+
 	"github.com/piotrjaromin/param-store-utils/pkg/sink"
 	"github.com/piotrjaromin/param-store-utils/pkg/source"
 	"log"
