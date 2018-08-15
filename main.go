@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	confFile := flag.String("conf", "./pipe.yaml", "Path to pipe.yaml file")
+	confFile := flag.String("conf", "./pipe.yml", "Path to pipe.yml file")
 	flag.Parse()
 
 	conf, err := config.Read(*confFile)

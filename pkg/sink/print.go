@@ -1,22 +1,32 @@
 package sink
 
 import (
-	"log"
+	"fmt"
 )
 
 type PrintSink struct {
-	params map[string]string
+	params    map[string]string
+	onlyVales bool
 }
 
 // NewPrint creates sink which prints data with which it was filled
 func NewPrint() (*PrintSink, error) {
-	return &PrintSink{}, nil
+	return &PrintSink{onlyVales: false}, nil
+}
+
+func NewPrintOnlyVals() (*PrintSink, error) {
+	return &PrintSink{onlyVales: true}, nil
 }
 
 func (ps *PrintSink) Fill(params map[string]string) error {
-	log.Println("Printing data")
+	fmt.Println("Printing data")
+
 	for key, val := range params {
-		log.Printf("%s: %s", key, val)
+		if ps.onlyVales {
+			fmt.Printf("\t\tserver %s:8000;\n", val)
+		} else {
+			fmt.Printf("%s: %s", key, val)
+		}
 	}
 
 	return nil

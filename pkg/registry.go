@@ -25,10 +25,13 @@ type Registry struct {
 
 func (r *Registry) registerDefaultSources() {
 	r.registerSource("ssm", source.NewSSM)
+	r.registerSource("fetchTasks", source.NewTaskFetcher)
 }
 
 func (r *Registry) registerDefaultSinks() {
 	r.registerSink("print", sink.NewPrint)
+	r.registerSink("printOnlyVals", sink.NewPrintOnlyVals)
+	r.registerSink("printNginx", sink.NewPrintNginx)
 }
 
 func (r *Registry) registerSink(name string, constructorFn interface{}) {
