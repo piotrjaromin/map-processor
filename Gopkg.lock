@@ -32,6 +32,7 @@
     "private/protocol/query/queryutil",
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
+    "service/ecs",
     "service/ssm",
     "service/sts"
   ]
@@ -49,9 +50,15 @@
   packages = ["."]
   revision = "0b12d6b5"
 
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9e005c9f326ac95f2f5319b5691d0ea9a5befcca40e4154185a286e02255583b"
+  inputs-digest = "c183ee45f58ab6bebc1d30867e46a93b94f308901604e8fd42cffb67eb175836"
   solver-name = "gps-cdcl"
   solver-version = 1

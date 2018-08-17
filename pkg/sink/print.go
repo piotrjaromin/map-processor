@@ -23,9 +23,9 @@ func (ps *PrintSink) Fill(params map[string]string) error {
 
 	for key, val := range params {
 		if ps.onlyVales {
-			fmt.Printf("\t\tserver %s:8000;\n", val)
+			fmt.Printf("%s\n", val)
 		} else {
-			fmt.Printf("%s: %s", key, val)
+			fmt.Printf("%s: %s\n", key, val)
 		}
 	}
 

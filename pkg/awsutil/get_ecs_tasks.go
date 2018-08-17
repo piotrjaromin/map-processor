@@ -57,3 +57,18 @@ func getTasks(svc *ecs.ECS, clusterName, serviceName *string) ([]*string, error)
 
 	return out.TaskArns, nil
 }
+
+func StopTask(svc *ecs.ECS, clusterName, taskName *string) error {
+
+	input := ecs.StopTaskInput{
+		Task:    taskName,
+		Cluster: clusterName,
+	}
+
+	_, err := svc.StopTask(&input)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
