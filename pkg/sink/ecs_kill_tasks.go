@@ -39,6 +39,7 @@ func (ts *TaskKiller) Fill(params map[string]string) error {
 		result[taskArn] = "KILLED"
 	}
 
+	ts.params = result
 	return nil
 }
 
