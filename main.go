@@ -13,7 +13,7 @@ func main() {
 	confFile := flag.String("conf", "./pipe.yml", "Path to pipe.yml file")
 	flag.Parse()
 
-	log.Printf("using conifg %s", *confFile)
+	log.Printf("using config %s", *confFile)
 	conf, err := config.Read(*confFile)
 	if err != nil {
 		log.Panicf("unable to read config file in path %s, reason: %s", *confFile, err.Error())

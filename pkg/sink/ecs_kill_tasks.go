@@ -32,11 +32,12 @@ func (ts *TaskKiller) Fill(params map[string]string) error {
 	svc := ecs.New(sess)
 
 	for taskArn := range params {
-		if err := awsutil.StopTask(svc, ts.ClusterName, &taskArn); err != nil {
-			result[taskArn] = fmt.Sprintf("FAIL to kill: %s", err.Error())
-		}
 
-		result[taskArn] = "KILLED"
+		if err := awsutil.StopTask(svc, ts.ClusterName, &taskArn); err != nil {
+			result[taskArn] = fmt.Sprintf("FAILED to kill: %s", err.Error())
+		} else {
+			result[taskArn] = "KILLED"
+		}
 	}
 
 	ts.params = result

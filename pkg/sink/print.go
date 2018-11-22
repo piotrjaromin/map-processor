@@ -25,7 +25,7 @@ func (ps *PrintSink) Fill(params map[string]string) error {
 		if ps.onlyVales {
 			fmt.Printf("%s\n", val)
 		} else {
-			fmt.Printf("%s: %s\n", key, val)
+			fmt.Printf("%s=\"%s\"\n", key, val)
 		}
 	}
 

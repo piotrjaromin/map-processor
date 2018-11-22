@@ -27,7 +27,7 @@ func (r *Registry) registerDefaultSources() {
 	r.registerSource("ssm", source.NewSSM)
 	r.registerSource("fetchTasks", source.NewTaskFetcher)
 	r.registerSource("fetchContainers", source.NewContainerFetcher)
-
+	r.registerSource("readJsonFile", source.NewJsonFileReader)
 }
 
 func (r *Registry) registerDefaultSinks() {
@@ -35,6 +35,8 @@ func (r *Registry) registerDefaultSinks() {
 	r.registerSink("printOnlyVals", sink.NewPrintOnlyVals)
 	r.registerSink("printNginx", sink.NewPrintNginx)
 	r.registerSink("taskKiller", sink.NewTaskKiller)
+	r.registerSink("kmsDecrypt", sink.NewKmsDecrypt)
+	r.registerSink("kmsEncrypt", sink.NewKmsEncrypt)
 
 }
 

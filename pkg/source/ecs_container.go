@@ -2,6 +2,7 @@ package source
 
 import (
 	"github.com/piotrjaromin/map-processor/pkg/awsutil"
+	"strconv"
 )
 
 type ContainerFetcher struct {
@@ -32,7 +33,11 @@ func (tf ContainerFetcher) Get() (map[string]string, error) {
 	for _, t := range out.Tasks {
 
 		for _, c := range t.Containers {
-			result[*c.ContainerArn] = *c.NetworkInterfaces[0].PrivateIpv4Address
+			if len(c.NetworkInterfaces) > 0 {
+				result[*c.ContainerArn] = *c.NetworkInterfaces[0].PrivateIpv4Address
+			} else {
+				result[*c.ContainerArn] = strconv.Itoa(int(*c.NetworkBindings[0].HostPort))
+			}
 		}
 	}
 
