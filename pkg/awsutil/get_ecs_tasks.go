@@ -1,20 +1,24 @@
 package awsutil
 
 import (
+	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecs"
-
-	"fmt"
 )
 
 func GetSession(region *string) (*session.Session, error) {
-	sess, err := session.NewSession(&aws.Config{
-		Region: region,
-	})
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		AssumeRoleTokenProvider: stscreds.StdinTokenProvider,
+		SharedConfigState:       session.SharedConfigEnable,
+		Config: aws.Config{
+			Region: region,
+		},
+	}))
 
-	if err != nil {
-		return nil, fmt.Errorf("Could not create session %s", err.Error())
+	if sess == nil {
+		return nil, fmt.Errorf("Could not create session")
 	}
 
 	return sess, nil
